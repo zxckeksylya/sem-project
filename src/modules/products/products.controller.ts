@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AddCategoryDto } from './dto/add-category.dto';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './products.model';
 import { ProductsService } from './products.service';
@@ -27,7 +28,7 @@ export class ProductsController {
   @ApiOperation({ summary: 'get product by id' })
   @ApiResponse({ status: 200, type: Product })
   @Get(':id')
-  getTownById(@Param('id') id: number) {
+  getProductById(@Param('id') id: number) {
     return this.productsService.getProductById(id);
   }
 
@@ -35,7 +36,17 @@ export class ProductsController {
   @ApiOperation({ summary: 'delete product by id' })
   @ApiResponse({ status: 200 })
   @Delete(':id')
-  deleteTownById(@Param('id') id: number) {
+  deleteProductById(@Param('id') id: number) {
     return this.productsService.removeProductById(id);
+  }
+
+  @Post('/add-category')
+  addCategory(@Body() dto: AddCategoryDto) {
+    return this.productsService.addCategory(dto);
+  }
+
+  @Post('/delete-category')
+  deleteCategory(@Body() dto: AddCategoryDto) {
+    return this.productsService.removeCategory(dto);
   }
 }

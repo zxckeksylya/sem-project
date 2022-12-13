@@ -36,6 +36,11 @@ export class SalesController {
     return this.salesService.getSalesByOfficeId(id);
   }
 
+  @Get('date/:date')
+  getSalesByDate(@Param('date') date: Date) {
+    return this.salesService.getSalesByDate(date);
+  }
+
   @Delete(':id')
   deleteSaleById(@Param('id') id: number) {
     return this.salesService.removeSaleById(id);

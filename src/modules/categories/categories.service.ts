@@ -36,4 +36,13 @@ export class CategoriesService {
     });
     category.destroy();
   }
+
+  async getCategoryByName(name: string): Promise<Category> {
+    const category = await this.categoryRepository.findOne({
+      where: {
+        name: name,
+      },
+    });
+    return category;
+  }
 }

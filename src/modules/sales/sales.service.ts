@@ -41,4 +41,12 @@ export class SalesService {
     const sale = await this.saleRepository.findOne({ where: { id } });
     sale.destroy();
   }
+
+  async getSalesByDate(date: Date) {
+    const sales = await this.saleRepository.findAll({
+      where: { date },
+      include: { all: true },
+    });
+    return sales;
+  }
 }
